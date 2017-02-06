@@ -77,14 +77,16 @@ def build_model():
     model.add(Activation('softmax'))
     return model
 
-def train_model()
+def train_model(model):
+    model.compile('adam', 'categorical_crossentropy', ['accuracy'])
+    checkpointer = ModelCheckpoint(filepath="mode.h5", verbose=1, save_best_only=True)
+
+    history = model.fit_generator(image_batch_generator('track_one_data', 100), samples_per_epoch=100, nb_epoch=10, callbacks=[checkpointer])
 
 if __name__ == '__main__':
     
     model = build_model()
     print(model.summary())
+    train_model(model)
 
-    model.compile('adam', 'categorical_crossentropy', ['accuracy'])
-    checkpointer = ModelCheckpoint(filepath="mode.h5", verbose=1, save_best_only=True)
-
-    history = model.fit_generator(image_batch_generator('track_one_data', 100), samples_per_epoch=100, nb_epoch=10, callbacks=[checkpointer])
+    
