@@ -1,4 +1,4 @@
 *.jpg
 *.csv
 *.app
-.vscode
+.vscode/*
