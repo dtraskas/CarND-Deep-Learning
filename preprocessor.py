@@ -31,13 +31,13 @@ class PreProcessor:
     # Loads the driving log in a Pandas dataframe for easy access
     def load_log(self, filename):
         print("Loading driving log...")        
-        self.log = pd.read_csv(self.data_path + "/" + filename, header=None, names=self.data_headers)
+        self.data = pd.read_csv(self.data_path + "/" + filename, header=None, names=self.data_headers)
 
     # Prepares training and validation sets
-    def prepare(self):        
+    def initialise(self):        
         print("Splitting to training and validation sets...")        
-        self.X_train = np.array(self.log['center'].values)
-        self.y_train = np.array(self.log['angle'].values)
+        self.X_train = np.array(self.data['center'].values)
+        self.y_train = np.array(self.data['angle'].values)
 
         self.X_train, self.y_train = shuffle(self.X_train, self.y_train)
         self.X_train, self.X_validation, self.y_train, self.y_validation = train_test_split(self.X_train, self.y_train, test_size=self.split_size, random_state=12)
@@ -83,7 +83,6 @@ class PreProcessor:
     # Creates an image generator to be used by the model
     def batch_generator(self, image_list, angles):  
         image_count = len(image_list)
-        print("Image count:" + str(image_count) + " sample: " + image_list[0])
         height, width, channels = self.image_shape
         while True:        
             index_list = np.random.choice(image_count, self.batch_size)
@@ -99,7 +98,7 @@ class PreProcessor:
     # Used for testing a model
     def read_images(self):
         height, width, channels = self.image_shape
-        image_paths = np.array(self.log['center'].values)
+        image_paths = np.array(self.data['center'].values)
         image_paths = self.prepare_paths(image_paths)
         image_array = np.empty((len(image_paths), height, width, channels), dtype=np.uint8)
         
@@ -111,8 +110,8 @@ class PreProcessor:
 
     # Returns the x values
     def get_xvalues(self):
-        return np.array(self.log['center'].values)
+        return np.array(self.data['center'].values)
 
     # Returns the y values    
     def get_yvalues(self):
-        return np.array(self.log['angle'].values)
+        return np.array(self.data['angle'].values)
