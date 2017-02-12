@@ -14,13 +14,13 @@ from modelbuilder import ModelBuilder
 if __name__ == '__main__':
     
     # Model definitions that are passed to the configurator
-    epochs = 1
+    epochs = 20
     batch_size = 128    
     split_size = 0.2
     image_shape = (160, 320, 3)
     reduced_shape = (80, 160, 3)
     learning_rate = 0.0001
-    bTrain = False
+    bTrain = True
 
     if (bTrain):
         print('Start training...')
