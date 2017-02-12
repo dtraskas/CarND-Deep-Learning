@@ -62,7 +62,7 @@ class PreProcessor:
 
     # Reads an image from the filename specified 
     def read_image(self, filename):
-        return imread(filename)    
+        return imread(filename)            
 
     # Resizes an array of images to the shape provided
     def resize(self, images):
@@ -79,6 +79,12 @@ class PreProcessor:
             prepared_paths[cnt] = filename.rsplit("/")[-1]
 
         return prepared_paths
+    
+    def rgb2gray(self, images):
+        return np.mean(images, axis=3, keepdims=True)
+
+    def normalise(self, images):
+        return images / (255.0 / 2) - 1
 
     # Creates an image generator to be used by the model
     def batch_generator(self, image_list, angles):  
@@ -93,8 +99,11 @@ class PreProcessor:
                 image_array[cnt] = self.read_image(self.data_path + "/IMG/" + filename)
 
             image_array = self.resize(image_array)        
+            image_array = self.rgb2gray(image_array)
+            image_array = self.normalise(image_array)
+
             yield image_array, angle_array
-    
+
     # Used for testing a model
     def read_images(self):
         height, width, channels = self.image_shape
@@ -105,7 +114,8 @@ class PreProcessor:
         for cnt, filename in enumerate(image_paths):                        
             image_array[cnt] = self.read_image(self.data_path + "/IMG/" + filename)
 
-        image_array = self.resize(image_array)  
+        image_array = self.resize(image_array)
+          
         return image_array
 
     # Returns the x values

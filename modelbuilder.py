@@ -26,7 +26,7 @@ class ModelBuilder:
         self.batch_size = config.batch_size        
         self.split_size = config.split_size        
 
-    # Builds a model using the Keras library
+    # Builds a model using the Keras library and the NVidia pipeline
     def initialise(self):
         self.model = Sequential()
         
@@ -40,13 +40,13 @@ class ModelBuilder:
         self.model.add(Convolution2D(64, 3, 3, border_mode='valid', activation='relu'))
         self.model.add(Flatten())    
         self.model.add(Dense(1164, activation='relu'))
-        self.model.add(Dropout(0.5))
+        self.model.add(Dropout(0.7))
         self.model.add(Dense(100, activation='relu'))
-        self.model.add(Dropout(0.5))
+        self.model.add(Dropout(0.7))
         self.model.add(Dense(50, activation='relu'))
-        self.model.add(Dropout(0.5))
+        self.model.add(Dropout(0.7))
         self.model.add(Dense(10, activation='relu'))
-        self.model.add(Dropout(0.5))
+        self.model.add(Dropout(0.7))
         self.model.add(Dense(1, init='normal'))
 
         return self.model
