@@ -36,7 +36,8 @@ if __name__ == '__main__':
         model_builder = ModelBuilder(configurator)
         model = model_builder.initialise()
         #model.load_weights('initials_weights.h5')
-        model.compile(optimizer=Adam(lr=learning_rate), loss='mse', metrics=['accuracy'])            
+        #model.compile(optimizer=Adam(lr=learning_rate), loss='mse', metrics=['accuracy'])            
+        model.compile(optimizer='adam', loss='mse', metrics=['accuracy'])            
         history = model.fit_generator(train_generator, samples_per_epoch=preprocessor.get_train_count(), 
                                     nb_epoch=epochs, 
                                     validation_data=validation_generator, nb_val_samples=preprocessor.get_validation_count())                                     

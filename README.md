@@ -16,24 +16,14 @@ The goals / steps of this project are the following:
 ###Model Architecture and Training Strategy
 For this project I chose the Keras framework that sits on top of Tensorflow. Keras offers a high level framework and a number of useful features such as Data Generators for image pre-processing, that make the code easier to read, reusable and faster to develop.
 
-For my model I chose the NVIDIA architecture as mentioned in their recent, with 5 convolutional layers, 4 fully connected layers and one output layer. The NVIDIA architecture utilises images of 66x200 pixels and in my case I am resizing the image from 160x320 to 80x160 so by half. Dropout layers are added to reduce overfitting.
+For my model I chose the Nvidia architecture as mentioned in their recent published paper (https://arxiv.org/abs/1604.07316) 'End to End Learning for Self-Driving Cars'. My architecture uses 5 convolutional layers, 4 fully connected layers and one output layer. The Nvidia architecture utilises images of 66x200 pixels however in my case I am resizing the images from 160x320 to 80x160 by half. The network uses RELU activation units and convolutional layers with 2x2 stride as well as dropout layers added to reduce overfitting. To further reduce overfitting the model was trained and validated on two different datasets which used a predefined split size.
 
+Each of the convolutional layers increases the depth until the last convolutional layer that gets flattened to 1164 neurons as described in the Nvidia architecture. Subsequently hidden layers of 100, 50, 10 are added until the last output neuron that essentially predicts the steering angle.
 
-####1. An appropriate model arcthiecture has been employed
+In order to simplify the creation of a model and the collection of data I created two main classes, the ModelBuilder and the PreProcessor. The PreProcessor essentially loads the driving log and the images associated with it. 
 
-My model consists of a convolution neural network with 3x3 filter sizes and depths between 32 and 128 (model.py lines 18-24) 
+The model uses an Adam optimizer with a specified learning rate that has proven in my experiments to work well. The loss function was set to the mean squared error between predicted and actuals. 
 
-The model includes RELU layers to introduce nonlinearity (code line 20), and the data is normalized in the model using a Keras lambda layer (code line 18). 
-
-####2. Attempts to reduce overfitting in the model
-
-The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
-
-The model was trained and validated on different data sets to ensure that the model was not overfitting (code line 10-16). The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track.
-
-####3. Model parameter tuning
-
-The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
 
 ####4. Appropriate training data
 
