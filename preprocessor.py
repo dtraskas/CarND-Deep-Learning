@@ -72,20 +72,6 @@ class PreProcessor:
             resized.append(transform.resize(image, (height, width)))    
         return np.array(resized, dtype='float32')
 
-    # Strips out any unecessary paths and standardises the path format
-    def prepare_paths(self, image_list):
-        prepared_paths = np.array(image_list)
-        for cnt, filename in enumerate(image_list):            
-            prepared_paths[cnt] = filename.rsplit("/")[-1]
-
-        return prepared_paths
-    
-    def rgb2gray(self, images):
-        return np.mean(images, axis=3, keepdims=True)
-
-    def normalise(self, images):
-        return images / (255.0 / 2) - 1
-
     # Creates an image generator to be used by the model
     def batch_generator(self, image_list, angles):  
         image_count = len(image_list)
@@ -99,9 +85,6 @@ class PreProcessor:
                 image_array[cnt] = self.read_image(self.data_path + "/IMG/" + filename)
 
             image_array = self.resize(image_array)        
-            image_array = self.rgb2gray(image_array)
-            image_array = self.normalise(image_array)
-
             yield image_array, angle_array
 
     # Used for testing a model
@@ -117,6 +100,14 @@ class PreProcessor:
         image_array = self.resize(image_array)
           
         return image_array
+
+    # Strips out any unecessary paths and standardises the path format
+    def prepare_paths(self, image_list):
+        prepared_paths = np.array(image_list)
+        for cnt, filename in enumerate(image_list):            
+            prepared_paths[cnt] = filename.rsplit("/")[-1]
+
+        return prepared_paths
 
     # Returns the x values
     def get_xvalues(self):
