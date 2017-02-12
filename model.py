@@ -16,7 +16,7 @@ if __name__ == '__main__':
     # Model definitions that are passed to the configurator
     epochs = 10
     batch_size = 128    
-    split_size = 0.2
+    split_size = 0.1
     image_shape = (160, 320, 3)
     reduced_shape = (80, 160, 3)
     learning_rate = 0.0001
@@ -35,7 +35,7 @@ if __name__ == '__main__':
 
         model_builder = ModelBuilder(configurator)
         model = model_builder.initialise()
-
+        model.load_weights('initials_weights.h5')
         model.compile(optimizer=Adam(lr=learning_rate), loss='mse', metrics=['accuracy'])            
         history = model.fit_generator(train_generator, samples_per_epoch=preprocessor.get_train_count(), 
                                     nb_epoch=epochs, 

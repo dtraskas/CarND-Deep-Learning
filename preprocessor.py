@@ -13,7 +13,8 @@ from scipy.misc import imread, imresize
 
 from sklearn.utils import shuffle
 from sklearn.model_selection import train_test_split
-
+from keras.preprocessing.image import ImageDataGenerator
+import math
 #
 # The Data Preprocessor loads all the necessary training data and applies transformations to it
 # 
@@ -44,13 +45,41 @@ class PreProcessor:
 
     # Returns the batch generator with training data
     def get_train_generator(self):
-        self.X_train = self.prepare_paths(self.X_train)
-        return self.batch_generator(self.X_train, self.y_train)
+        generator = ImageDataGenerator(width_shift_range=0.2, height_shift_range=0.02, fill_mode='nearest')        
+        height, width, channels = self.image_shape        
+        image_paths = self.prepare_paths(self.X_train)
+        image_array = np.empty((len(image_paths), height, width, channels), dtype=np.uint8)        
+        angles = np.empty_like(self.y_train)
+
+        for cnt, filename in enumerate(image_paths):                        
+            angle = self.y_train[cnt]    
+            if (angle > -0.95 and angle < 0.95 and angle != 0):
+                image = self.read_image(self.data_path + "/IMG/" + filename) 
+                if np.random.choice(2):
+                    image_array[cnt] = np.fliplr(image)
+                    angles[cnt] = angle * -1
+                else:
+                    image_array[cnt] = image 
+                    angles[cnt] = angle
+
+        image_array = self.resize(image_array)
+        return generator.flow(image_array, self.y_train, batch_size=self.batch_size)
+        #return self.batch_generator(self.X_train, self.y_train)
 
     # Returns the batch generator with validation data
     def get_validation_generator(self):
-        self.X_validation = self.prepare_paths(self.X_validation)
-        return self.batch_generator(self.X_validation, self.y_validation)
+        generator = ImageDataGenerator()
+        height, width, channels = self.image_shape
+        image_paths = self.prepare_paths(self.X_validation)
+        image_array = np.empty((len(image_paths), height, width, channels), dtype=np.uint8)
+        
+        for cnt, filename in enumerate(image_paths):          
+
+            image_array[cnt] = self.read_image(self.data_path + "/IMG/" + filename)
+
+        image_array = self.resize(image_array)
+        return generator.flow(image_array, self.y_validation, batch_size=self.batch_size)
+        #return self.batch_generator(self.X_validation, self.y_validation)
 
     # Returns the count of training data
     def get_train_count(self):

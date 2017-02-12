@@ -38,8 +38,6 @@ prev_image_array = None
     
 @sio.on('telemetry')
 def telemetry(sid, data):
-    
-    reduced_shape = (80, 160)
     # The current steering angle of the car
     steering_angle = float(data["steering_angle"])
     # The current throttle of the car
@@ -48,8 +46,8 @@ def telemetry(sid, data):
     speed = data["speed"]
     # The current image from the center camera of the car
     imgString = data["image"]
-    image = Image.open(BytesIO(base64.b64decode(imgString)))    
-    image_array = transform.resize(np.asarray(image), reduced_shape)
+    image = Image.open(BytesIO(base64.b64decode(imgString)))
+    image_array = transform.resize(np.asarray(image), (80, 160))
     transformed_image_array = np.array(image_array[None, :, :, :])
 
     # This model currently assumes that the features of the model are just the images. Feel free to change this.
