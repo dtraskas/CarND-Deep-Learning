@@ -63,7 +63,9 @@ class PreProcessor:
                     angles[cnt] = angle
 
         image_array = self.resize(image_array)
-        return generator.flow(image_array, self.y_train, batch_size=self.batch_size)
+        return generator.flow(image_array, angles, batch_size=self.batch_size)
+
+        #return generator.flow(image_array, self.y_train, batch_size=self.batch_size)
         #return self.batch_generator(self.X_train, self.y_train)
 
     # Returns the batch generator with validation data
