@@ -53,7 +53,8 @@ class PreProcessor:
 
         for cnt, filename in enumerate(image_paths):                        
             angle = self.y_train[cnt]    
-            if (angle > -0.98 and angle < 0.98 and not math.isclose(angle, 0, abs_tol=0.001)):
+            # just exclude extreme angles and angles close to zero
+            if (angle > -0.95 and angle < 0.95 and not math.isclose(angle, 0, abs_tol=0.001)):
                 image_array[cnt] = self.read_image(self.data_path + "/IMG/" + filename) 
                 
         image_array = self.resize(image_array)
@@ -68,7 +69,6 @@ class PreProcessor:
         image_array = np.empty((len(image_paths), height, width, channels), dtype=np.uint8)
         
         for cnt, filename in enumerate(image_paths):          
-
             image_array[cnt] = self.read_image(self.data_path + "/IMG/" + filename)
 
         image_array = self.resize(image_array)
