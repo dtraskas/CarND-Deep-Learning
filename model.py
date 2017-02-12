@@ -25,7 +25,7 @@ if __name__ == '__main__':
     if (bTrain):
         print('Start training...')
 
-        configurator = Configurator('track_one_data', image_shape, reduced_shape, batch_size, split_size)
+        configurator = Configurator('udacity_data', image_shape, reduced_shape, batch_size, split_size)
         preprocessor = PreProcessor(configurator)
         preprocessor.load_log("driving_log.csv")
         preprocessor.initialise()
