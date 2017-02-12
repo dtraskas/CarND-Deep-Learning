@@ -45,7 +45,7 @@ class PreProcessor:
 
     # Returns the batch generator with training data
     def get_train_generator(self):
-        generator = ImageDataGenerator(width_shift_range=0.2, height_shift_range=0.02, fill_mode='nearest')        
+        generator = ImageDataGenerator()        
         height, width, channels = self.image_shape        
         image_paths = self.prepare_paths(self.X_train)
         image_array = np.empty((len(image_paths), height, width, channels), dtype=np.uint8)        
