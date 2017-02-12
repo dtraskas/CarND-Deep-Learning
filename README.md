@@ -16,8 +16,6 @@ The goals / steps of this project are the following:
 ###Model Architecture and Training Strategy
 For this project I chose the Keras framework that sits on top of Tensorflow. Keras offers a high level framework and a number of useful features such as Data Generators for image pre-processing, that make the code easier to read, reusable and faster to develop.
 
-For my model I chose the NVIDIA architecture from their paper very closely in terms of structure, with 5 convolutional layers and 4 fully connected layers. NVIDIA uses images of 66x200 whereas I use 80x160 (resizing the originals from 160x320). This means that I end up with slightly more parameters than they did, but the architecture is the same. Additionally I added 2 dropout layers in the fully-connected section to reduce overfitting.
-
 
 ####1. An appropriate model arcthiecture has been employed
 
