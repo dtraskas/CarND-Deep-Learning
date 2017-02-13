@@ -12,6 +12,18 @@ The goals / steps of this project are the following:
 * Test that the model successfully drives around track one without leaving the road
 * Summarize the results with a written report
 
+###Files in this repo
+---
+
+- ```cmd model.py ``` is the main script that trains the model
+- ```cmd drive.py ``` is the script that sends to the Udacity simulator the predicted steering angle 
+- ```cmd preprocess.py ``` is the script that contains the PreProcessor class for preprocessing the data 
+- ```cmd modelbuilder.py ``` is the script that contains the model builder class that constructs our CNN model 
+- ```cmd configurator.py ``` is a simple script with model parameters passed to the other scripts
+- ```cmd tests.py ``` just some very simple test that was used in initial modelling stages 
+- ```cmd model.json ``` is the model architecture
+- ```cmd model.h5 ``` are the saved model weights
+
 ###Running the code 
 ---
 
@@ -42,4 +54,18 @@ For training and validation data I had real difficulty getting enough good image
 ---
 
 Initially I created my own batch generator that I was populating with images and steering angles every time the training algorithm was requesting for training data. However I wanted to augment the provided data so in the end I utilised the Keras ImageDataGenerator which proved to be really useful. Initially I am resizing the images and then for the training data I shift the images horizontally and vertically by a small amount. I also filter out extreme angles or angles that are very close to zero in order to avoid having a model that is heavily biased to examples with zero angles which are the majority in the datasets. 
+
+###System Limitations
+---
+
+Due to system limitations and lack of a GPU I utilised an AWS instance g2.2xlarge in order to train my model. I started with 10 epochs but quickly realised that I could achieve reasonable performance around 5 epochs. Unfortunately the images collected are not enough in terms of edge cases so my model is not very stable.
+
+###Simulations
+---
+I have run simulations at the lowest resolution and simple graphics and also the next resolution up and the model seems to be OK for most of the track apart from the bridge. At that point it gets stuck a little bit but manages to escape after a few seconds and continue running. Overall it manages to go through the track without any other issues.
+
+###Next Steps
+---
+I think a number of things need to be done in order to improve this model. First of all I would like to change the brightness and the color space of the images. I think that way I will avoid having issues distinguishing between dirt and track. Second I would like to utilise all the images and angles, left, right and center. In that scenario I would simply offset the left and right angles by a small amount. And finally I definitely need to get a few more images for my training set. I think this was the biggest struggle so far.
+
 
