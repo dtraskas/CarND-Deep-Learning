@@ -70,9 +70,9 @@ Original Frames
 
 In order to understand the distribution of steering angles in the Udacity data and the data I generated I plotted the histograms of angles for both. Below you can see that the Udacity dataset has most steering angles concentrated at zero whereas the dataset I created is a bit more balanced.
 
-![Udacity][image4]
+![Udacity][image3]
 
-![Udacity][image5]
+![Udacity][image4]
 
 Initially I created my own batch generator that I was populating with images and steering angles every time the training algorithm was requesting for training data. However I wanted to augment the provided data so in the end I utilised the Keras ImageDataGenerator which proved to be really useful. First step is to resize the images and then for the training data I shift the images horizontally and vertically by a small amount. I also filter out extreme angles or angles that are very close to zero in order to avoid having a model that is heavily biased to examples with zero angles which are the majority in the datasets. 
 

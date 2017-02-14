@@ -24,11 +24,11 @@ def read_images(path):
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-data = pd.read_csv( "track_one_data/driving_log.csv", header=None, names=['center', 'left', 'right', 'angle', 'throttle', 'break', 'speed'])
+data = pd.read_csv( "udacity_data/driving_log.csv", header=None, names=['center', 'left', 'right', 'angle', 'throttle', 'break', 'speed'])
 s1 = data['angle']
 plt.figure()
 s1.plot.hist(alpha=0.5)
-plt.savefig('my_hist.jpg')
+plt.savefig('udacity_hist.jpg', bbox_inches='tight')
 
 #%%
 import matplotlib.pyplot as plt
@@ -59,9 +59,9 @@ grid = ImageGrid(fig, 111,  # similar to subplot(111)
                  nrows_ncols=(1, 3),  # creates 2x2 grid of axes                
                  axes_pad=0.3  # pad between axes in inch.
                  )
-d1 = data.sample(n=1)    
 
 
+'''
 img1 = read_image(' /Users/talos/Projects/Udacity/DL-Autonomous-Car/track_one_data/IMG/left_2017_02_12_22_15_38_042.jpg')
 
 img2 = read_image('/Users/talos/Projects/Udacity/DL-Autonomous-Car/track_one_data/IMG/center_2017_02_12_22_12_37_042.jpg')
@@ -71,9 +71,10 @@ img3 = read_image(' /Users/talos/Projects/Udacity/DL-Autonomous-Car/track_one_da
 add_image(img1, grid[0], 'Left camera (steering = ' + str(round(-0.08012585, 3)) + ')')
 add_image(img2, grid[1], 'Center camera (steering = ' + str(round(-0.2931493, 3))  + ')')
 add_image(img3, grid[2], 'Right camera (steering = ' + str(round(0, 3))  + ')')
-plt.savefig('images_two.jpg')
+plt.savefig('images_two.jpg',bbox_inches='tight')
 
 '''
+d1 = data.sample(n=1)
 grid = ImageGrid(fig, 111,  # similar to subplot(111)
                  nrows_ncols=(3, 3),  # creates 2x2 grid of axes                
                  axes_pad=0.3  # pad between axes in inch.
@@ -86,7 +87,6 @@ for i in range(0, 3):
     add_image(load_image(d1,'left'), grid[i * 3 + 1], d1['angle'].values)
     d1 = data.sample(n=1)    
     add_image(load_image(d1,'right'), grid[i * 3 + 2], d1['angle'].values)
-'''
+plt.savefig('images.jpg', bbox_inches='tight')
 
-#plt.savefig('images.jpg')
 plt.show()
