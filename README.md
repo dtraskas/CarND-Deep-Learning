@@ -82,10 +82,10 @@ Due to system limitations and lack of a GPU I utilised an AWS instance g2.2xlarg
 
 ###Simulations
 ---
-I have run simulations at the lowest resolution and simple graphics and also the next resolution up and the model seems to be OK for most of the track apart from the bridge. At that point it gets stuck a little bit but manages to escape after a few seconds and continue running. Overall it manages to go through the track without any other issues.
+I have run simulations at the lowest resolution and simple graphics and also the next resolution up and the model seems to be OK for most of the track apart from the bridge. At that point it gets stuck a little bit but manages to escape after a few seconds and continue running. Overall it manages to go through the track without any other issues. I have also run succesfuly the simulation for the second track which seems to be easier for the model. 
 
 ###Next Steps
 ---
-I think a number of things need to be done in order to improve this model. First of all I would like to change the brightness and the color space of the images. I think that way I will avoid having issues distinguishing between dirt and track. Second I would like to utilise all the images and angles, left, right and center. In that scenario I would simply offset the left and right angles by a small amount. And finally I definitely need to get a few more images for my training set. I think this was the biggest struggle so far.
+I think a number of things need to be done in order to improve this model. First of all I would like to change the brightness and the color space of the images. I think that way I will avoid having issues distinguishing between dirt and track. Second I would like to utilise all the images and angles, left, right and center. In that scenario I would simply offset the left and right angles by a small amount. And finally I definitely need to get a few more images for my training set. I think this was the biggest struggle so far. I can easily add extra images by following the flipping method of existing images and angles. 
 
 
