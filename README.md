@@ -64,7 +64,7 @@ Original Frames
 
 ![alt text][image2]
 
-In order to understand the distribution of steering angles in the Udacity data and the data I generated I plotted the histograms of angles for both. Below you can see that the Udacity dataset has higher concentration of zero angles especially when compared to the dataset I generated. That means that any model built will be weighted more to zero angles and further preprocessing might be required to tackle that. 
+In order to understand the distribution of steering angles in the Udacity data and the data I generated I plotted the histograms of angles for both. Below you can see that the Udacity dataset has higher concentration of zero angles especially when compared to the dataset I generated. That means that any model built will be weighted more to zero angles and further preprocessing might be required to tackle that. We can also notice that the generated data has a higher count of negative steering angles than positive ones. The frequency of steering angles decreases with increasing steering angle value. Especially for angles > 0.5rad, the counts are negligible.
 
 ![Udacity][image3]
 
@@ -72,7 +72,9 @@ In order to understand the distribution of steering angles in the Udacity data a
 
 ![Udacity][image5]
 
-To begin with, I created my own batch generator that I was populating with images and steering angles every time the training algorithm was requesting for training data. However I wanted to augment the provided data so in the end I utilised the Keras ImageDataGenerator which proved to be really useful. First step of the pipeline is to resize the images and then for the training data I shift the images horizontally and vertically by a small amount. I filter out extreme angles or angles that are very close to zero in order to avoid having a model that is heavily biased to examples with zero angles. Looking at the previous histograms this is a really crucial step in the modelling. 
+To process the image datasets I created my own batch generator to begin with. The generator using the yield command was returning a batch of images and angle tuples of size batch_size every time the training algorithm was requesting for training data. After a few experiments I realised that I needed to further augment the provided data so in the end I utilised the Keras ImageDataGenerator which proved to be really useful and a lot more flexible since it has built-in image processing routines. 
+
+First step of the new pipeline is to resize the images and then for the training data images are shifted horizontally and vertically by a small amount. Extreme angles or angles that are very close to zero are filtered out in order to avoid having a model that is heavily biased to examples with zero angles. Looking at the previous histograms this is a really crucial step in the preprocessing stage. 
 
 ###System Limitations
 ---
