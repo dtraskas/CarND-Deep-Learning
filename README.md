@@ -6,7 +6,8 @@
 [image1]: ./images.jpg "All Images"
 [image2]: ./images_two.jpg "Left/Centre/Right Images"
 [image3]: ./my_hist.jpg "Collected Data - Histogram"
-[image4]: ./udacity_hist.jpg "Udacity Data - Histogram"
+[image4]: ./my_hist_two.jpg "Collected Data - Histogram (Log)"
+[image5]: ./udacity_hist.jpg "Udacity Data - Histogram"
 
 ###Project Goals
 ---
@@ -68,14 +69,15 @@ Original Frames
 
 ![alt text][image2]
 
-In order to understand the distribution of steering angles in the Udacity data and the data I generated I plotted the histograms of angles for both. Below you can see that the Udacity dataset has most steering angles concentrated at zero whereas the dataset I created is a bit more balanced.
+In order to understand the distribution of steering angles in the Udacity data and the data I generated I plotted the histograms of angles for both. Below you can see that the Udacity dataset has higher concentration of zero angles especially when compared to the dataset I generated. That means that any model built will be weighted more to zero angles and further preprocessing might be required to tackle that. 
 
 ![Udacity][image3]
 
 ![Udacity][image4]
 
-Initially I created my own batch generator that I was populating with images and steering angles every time the training algorithm was requesting for training data. However I wanted to augment the provided data so in the end I utilised the Keras ImageDataGenerator which proved to be really useful. First step is to resize the images and then for the training data I shift the images horizontally and vertically by a small amount. I also filter out extreme angles or angles that are very close to zero in order to avoid having a model that is heavily biased to examples with zero angles which are the majority in the datasets. 
+![Udacity][image5]
 
+To begin with, I created my own batch generator that I was populating with images and steering angles every time the training algorithm was requesting for training data. However I wanted to augment the provided data so in the end I utilised the Keras ImageDataGenerator which proved to be really useful. First step of the pipeline is to resize the images and then for the training data I shift the images horizontally and vertically by a small amount. I filter out extreme angles or angles that are very close to zero in order to avoid having a model that is heavily biased to examples with zero angles. Looking at the previous histograms this is a really crucial step in the modelling. 
 
 ###System Limitations
 ---

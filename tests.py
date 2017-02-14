@@ -23,13 +23,15 @@ def read_images(path):
 #%%
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np 
 
 data = pd.read_csv( "track_one_data/driving_log.csv", header=None, names=['center', 'left', 'right', 'angle', 'throttle', 'break', 'speed'])
 s1 = data['angle']
 plt.figure()
-s1.plot.hist(alpha=0.5)
+s1.plot.hist(bins = 10, log = True)
+#s1.plot.hist(alpha=0.5)
 plt.title("Generated Data")
-plt.savefig('my_hist.jpg', bbox_inches='tight')
+plt.savefig('my_hist_two.jpg', bbox_inches='tight')
 
 #%%
 import matplotlib.pyplot as plt
