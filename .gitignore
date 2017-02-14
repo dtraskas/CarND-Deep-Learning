@@ -1,6 +1,10 @@
-*.jpg
 *.csv
 *.app
 .vscode/*
 __pycache__/*
 models/*
+test_data/*
+track_one_data/*
+track_two_data/*
+udacity_data/*
+kernel-470dc1ae-860c-4693-a4c8-01cdfef24fe1.json

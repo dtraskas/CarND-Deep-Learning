@@ -1,6 +1,13 @@
 #**Self Driving Car - Udacity**
 #**Behavioral Cloning**
 
+[//]: # (Image References)
+
+[image1]: ./images.jpg "All Images"
+[image2]: ./images_two.jpg "Left/Centre/Right Images"
+[image3]: ./my_hist.jpg "Collected Data - Histogram"
+[image4]: ./udacity_hist.jpg "Udacity Data - Histogram"
+
 ###Project Goals
 ---
 
@@ -48,12 +55,27 @@ In order to simplify the creation of a model and the collection of data I create
 
 The model uses an Adam optimizer so the learning rate was not tuned manually. The loss function was set to the mean squared error between predicted and actuals. 
 
-For training and validation data I had real difficulty getting enough good images by driving on both tracks. I experimented heavily with the Udacity provided datasets but unfortunately that did not prove to work very well either. At some point I had a decent model that was working well for the majority of the track except one area after the bridge. In this final submission I am using initial weights loaded from a good initial model and I start to train from that point onwards using extreme scenarios where I always move from the side of the road to the middle. The two datasets provide a good number of examples with center lane driving and recoveries from the left and right sides of the road.
-
 ###Data Generators and pre-processing
 ---
 
-Initially I created my own batch generator that I was populating with images and steering angles every time the training algorithm was requesting for training data. However I wanted to augment the provided data so in the end I utilised the Keras ImageDataGenerator which proved to be really useful. Initially I am resizing the images and then for the training data I shift the images horizontally and vertically by a small amount. I also filter out extreme angles or angles that are very close to zero in order to avoid having a model that is heavily biased to examples with zero angles which are the majority in the datasets. 
+For training and validation data I had real difficulty getting enough good images by driving on both tracks. I experimented heavily with the Udacity provided datasets but unfortunately that did not prove to work very well either. At some point I had a decent model that was working well for the majority of the track except one area after the bridge. In this final submission I am using initial weights loaded from a good initial model and I start to train from that point onwards using extreme scenarios where I always move from the side of the road to the middle. The two datasets provide a good number of examples with center lane driving and recoveries from the left and right sides of the road.
+
+Below are a few examples of the training set images and the corresponding steering angles s (in radians).
+
+![alt text][image1]
+
+Original Frames
+
+![alt text][image2]
+
+In order to understand the distribution of steering angles in the Udacity data and the data I generated I plotted the histograms of angles for both. Below you can see that the Udacity dataset has most steering angles concentrated at zero whereas the dataset I created is a bit more balanced.
+
+![Udacity][image4]
+
+![Udacity][image5]
+
+Initially I created my own batch generator that I was populating with images and steering angles every time the training algorithm was requesting for training data. However I wanted to augment the provided data so in the end I utilised the Keras ImageDataGenerator which proved to be really useful. First step is to resize the images and then for the training data I shift the images horizontally and vertically by a small amount. I also filter out extreme angles or angles that are very close to zero in order to avoid having a model that is heavily biased to examples with zero angles which are the majority in the datasets. 
+
 
 ###System Limitations
 ---
