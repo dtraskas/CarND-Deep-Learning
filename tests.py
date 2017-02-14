@@ -24,11 +24,12 @@ def read_images(path):
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-data = pd.read_csv( "udacity_data/driving_log.csv", header=None, names=['center', 'left', 'right', 'angle', 'throttle', 'break', 'speed'])
+data = pd.read_csv( "track_one_data/driving_log.csv", header=None, names=['center', 'left', 'right', 'angle', 'throttle', 'break', 'speed'])
 s1 = data['angle']
 plt.figure()
 s1.plot.hist(alpha=0.5)
-plt.savefig('udacity_hist.jpg', bbox_inches='tight')
+plt.title("Generated Data")
+plt.savefig('my_hist.jpg', bbox_inches='tight')
 
 #%%
 import matplotlib.pyplot as plt
