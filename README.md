@@ -11,7 +11,6 @@
 
 ###Project Goals
 ---
-
 The goals / steps of this project are the following:
 
 * Use the simulator to collect data of good driving behavior
@@ -22,7 +21,6 @@ The goals / steps of this project are the following:
 
 ###Files in this repo
 ---
-
 - ```cmd model.py ``` is the main script that trains the model
 - ```cmd drive.py ``` is the script that sends to the Udacity simulator the predicted steering angle 
 - ```cmd preprocess.py ``` is the script that contains the PreProcessor class for preprocessing the data 
@@ -34,7 +32,6 @@ The goals / steps of this project are the following:
 
 ###Running the code 
 ---
-
 In order to run this code you will need the following:
 
 - [Udacity Simulator](https://d17h27t6h515a5.cloudfront.net/topher/2016/November/5831f290_simulator-macos/simulator-macos.zip)
@@ -45,7 +42,6 @@ In order to run this code you will need the following:
 
 ###Model Architecture and Training Strategy
 ---
-
 For this project I chose the Keras framework that sits on top of Tensorflow. Keras offers a high level framework and a number of useful features such as Data Generators for image pre-processing, that make the code easier to read, reusable and faster to develop.
 
 For my model I chose the Nvidia architecture as mentioned in their recent published paper [End to End Learning for Self-Driving Cars](https://arxiv.org/abs/1604.07316). My architecture uses 5 convolutional layers, 4 fully connected layers and one output layer. The Nvidia architecture utilises images of 66x200 pixels however in my case I am resizing the images from 160x320 to 80x160 by half. The network uses RELU activation units and convolutional layers with 2x2 stride as well as dropout layers added to reduce overfitting. To further reduce overfitting the model was trained and validated on two different datasets which used a predefined split size.
@@ -58,7 +54,6 @@ The model uses an Adam optimizer so the learning rate was not tuned manually. Th
 
 ###Data Generators and pre-processing
 ---
-
 For training and validation data I had real difficulty getting enough good images by driving on both tracks. I experimented heavily with the Udacity provided datasets but unfortunately that did not prove to work very well either. At some point I had a decent model that was working well for the majority of the track except one area after the bridge. In this final submission I am using initial weights loaded from a good initial model and I start to train from that point onwards using extreme scenarios where I always move from the side of the road to the middle. The two datasets provide a good number of examples with center lane driving and recoveries from the left and right sides of the road.
 
 Below are a few examples of the training set images and the corresponding steering angles s (in radians).
@@ -81,7 +76,6 @@ To begin with, I created my own batch generator that I was populating with image
 
 ###System Limitations
 ---
-
 Due to system limitations and lack of a GPU I utilised an AWS instance g2.2xlarge in order to train my model. I started with 10 epochs but quickly realised that I could achieve reasonable performance around 5 epochs. Unfortunately the images collected are not enough in terms of edge cases so my model is not very stable.
 
 ###Simulations
