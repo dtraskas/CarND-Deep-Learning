@@ -3,11 +3,11 @@
 
 [//]: # (Image References)
 
-[image1]: ./images.jpg "All Images"
-[image2]: ./images_two.jpg "Left/Centre/Right Images"
-[image3]: ./my_hist.jpg "Collected Data - Histogram"
-[image4]: ./my_hist_two.jpg "Collected Data - Histogram (Log)"
-[image5]: ./udacity_hist.jpg "Udacity Data - Histogram"
+[image1]: ./images/images.jpg "All Images"
+[image2]: ./images/images_two.jpg "Left/Centre/Right Images"
+[image3]: ./images/my_hist.jpg "Collected Data - Histogram"
+[image4]: ./images/my_hist_two.jpg "Collected Data - Histogram (Log)"
+[image5]: ./images/udacity_hist.jpg "Udacity Data - Histogram"
 
 ###Project Goals
 ---

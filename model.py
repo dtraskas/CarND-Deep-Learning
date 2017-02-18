@@ -14,7 +14,7 @@ from modelbuilder import ModelBuilder
 if __name__ == '__main__':
     
     # Model definitions that are passed to the configurator
-    epochs = 5
+    epochs = 10
     batch_size = 128    
     split_size = 0.1
     image_shape = (160, 320, 3)
