@@ -15,8 +15,8 @@ if __name__ == '__main__':
     
     # Model definitions that are passed to the configurator
     epochs = 10
-    batch_size = 128    
-    split_size = 0.1
+    batch_size = 256    
+    split_size = 0.05
     image_shape = (160, 320, 3)
     reduced_shape = (80, 160, 3)
     learning_rate = 0.0001
@@ -41,9 +41,9 @@ if __name__ == '__main__':
         # initialise the CNN model in the ModelBuilder
         model_builder = ModelBuilder(configurator)
         model = model_builder.initialise()
-        model.load_weights('initials_weights.h5')
-        model.compile(optimizer=Adam(lr=learning_rate), loss='mse', metrics=['accuracy'])            
-        #model.compile(optimizer='adam', loss='mse', metrics=['accuracy'])            
+        #model.load_weights('initials_weights.h5')
+        #model.compile(optimizer=Adam(lr=learning_rate), loss='mse', metrics=['accuracy'])            
+        model.compile(optimizer='adam', loss='mse', metrics=['accuracy'])            
         history = model.fit_generator(train_generator, samples_per_epoch=preprocessor.get_train_count(), 
                                     nb_epoch=epochs, 
                                     validation_data=validation_generator, nb_val_samples=preprocessor.get_validation_count())     
