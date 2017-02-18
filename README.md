@@ -21,14 +21,14 @@ The goals / steps of this project are the following:
 
 ###Files in this repo
 ---
-- ```cmd model.py ``` is the main script that trains the model
-- ```cmd drive.py ``` is the script that sends to the Udacity simulator the predicted steering angle 
-- ```cmd preprocess.py ``` is the script that contains the PreProcessor class for preprocessing the data 
-- ```cmd modelbuilder.py ``` is the script that contains the model builder class that constructs our CNN model 
-- ```cmd configurator.py ``` is a simple script with model parameters passed to the other scripts
-- ```cmd tests.py ``` just some very simple test that was used in initial modelling stages 
-- ```cmd model.json ``` is the model architecture
-- ```cmd model.h5 ``` are the saved model weights
+- ```model.py ``` is the main script that trains the model
+- ```drive.py ``` is the script that sends to the Udacity simulator the predicted steering angle 
+- ```preprocess.py ``` is the script that contains the PreProcessor class for preprocessing the data 
+- ```modelbuilder.py ``` is the script that contains the model builder class that constructs our CNN model 
+- ```configurator.py ``` is a simple script with model parameters passed to the other scripts
+- ```tests.py ``` just some very simple test that was used in initial modelling stages 
+- ```models/model.json ``` is the model architecture
+- ```models/model.h5 ``` are the saved model weights
 
 ###Running the code 
 ---
